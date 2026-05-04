@@ -238,6 +238,33 @@ module.exports.product = model({
         stopwords: {
             id: 'english-stopwords',
             words: ['the', 'is', 'at', 'which', 'on']
+        },
+
+        // LLM & RAG Model Definitions
+        conversation_models: [{
+            id: 'openai-rag',
+            model_name: 'openai/gpt-4o',
+            api_key: 'YOUR_OPENAI_API_KEY',
+            system_prompt: 'You are a helpful search assistant.',
+            max_bytes: 16000,
+            ttl: 3600
+        }],
+        nl_search_models: [{
+            id: 'gemini-model',
+            model_name: 'google/gemini-1.5-flash',
+            api_key: 'YOUR_GOOGLE_AI_KEY'
+        }],
+
+        // AI & Vector Search Configuration
+        content: {
+            index: true,
+            embed: {
+                from: ['title', 'category'],
+                model_config: {
+                    model_name: 'openai/text-embedding-3-small',
+                    api_key: 'YOUR_API_KEY'
+                }
+            }
         }
     }
 }, {

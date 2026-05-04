@@ -207,20 +207,25 @@ var resolveConstraints = function () {
 
                 field.embed = constraint.embed;
             }
-            if (schemaMapping && !schemaMapping[property]) {
-
-                schemaMapping[property] = {}
-            }
             if (schemaMapping) {
 
+                if (!schemaMapping[property]) {
+
+                    schemaMapping[property] = {};
+                }
                 Object.assign(...[
                     schemaMapping[property], constraint
                 ]);
             }
         } else {
 
-            // Collection-level constraints
-            if (property === "default_sorting_field") {
+            // Collection-level settings
+            if ([
+                "synonyms", "overrides", "stopwords",
+                "conversation_models", "nl_search_models"
+            ].includes(property)) {
+                schema[property] = constraints[property];
+            } else if (property === "default_sorting_field") {
 
                 schema.default_sorting_field = constraint;
             } else if (property === "symbols_to_index") {
