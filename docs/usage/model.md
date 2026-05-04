@@ -1,6 +1,6 @@
 ## Models - Unified Data Layer Architecture
 
-BeamJS provides a unified interface for both SQL and NoSQL databases through its model system. It abstracts the complexity of different database engines while maintaining consistency across MongoDB (via Mongoose) and SQL databases (via Sequelize).
+BeamJS provides a unified interface for SQL, NoSQL, and Search databases through its model system. It abstracts the complexity of different database engines while maintaining consistency across MongoDB (via Mongoose), SQL databases (via Sequelize), and Typesense.
 
 ---
 
@@ -20,7 +20,7 @@ BeamJS provides a unified interface for both SQL and NoSQL databases through its
 ### Database Agnostic Design
 
 BeamJS models are designed with database independence as a core principle. This means:
-- **Consistent API**: The same model definition works across MongoDB, PostgreSQL, MySQL, and other supported databases
+- **Consistent API**: The same model definition works across MongoDB, PostgreSQL, MySQL, Typesense, and other supported databases
 - **Native Performance**: Despite abstraction, models leverage native database optimizations
 - **Seamless Migration**: Change database engines without rewriting application logic
 - **Unified Syntax**: Single learning curve regardless of underlying database technology
@@ -170,7 +170,7 @@ When using reserved database words as field names, use the object notation:
 
 ## Constraints System
 
-Constraints provide database-specific configuration for SQL and NoSQL databases.
+Constraints provide database-specific configuration for SQL, NoSQL, and Search databases.
 
 ### SQL Constraints
 
@@ -195,6 +195,56 @@ module.exports.user = model({
     }
 }, {
     // Schema definition
+}, []);
+```
+
+### Typesense Constraints
+
+```javascript
+module.exports.product = model({
+    name: 'product',
+    constraints: {
+        // Collection configuration
+        default_sorting_field: 'popularity', // Default field for sorting
+        symbols_to_index: ['+', '#'],       // Special symbols to index
+        token_separators: ['-', '_'],       // Custom word separators
+        enable_nested_fields: true,         // Enable support for nested objects
+        voice_query_model: 'en-US',         // Voice search model
+        
+        // Field constraints
+        title: {
+            index: true,                    // Index for searching
+            facet: true,                    // Enable faceting
+            sort: true,                     // Enable sorting
+            infix: true,                    // Enable infix/partial search
+            locale: 'en'                    // Language-specific stemming
+        },
+        category: {
+            facet: true,
+            index: true
+        },
+        embedding: {
+            type: 'float[]',                // Vector for semantic search
+            num_dim: 1536                   // OpenAI embedding dimensions
+        }
+
+        // Search enhancements
+        synonyms: [
+            { id: 'shoes', synonyms: ['sneakers', 'footwear', 'boots'] }
+        ],
+        overrides: [
+            { id: 'promo', rule: 'discount', filter_by: 'onSale:true' }
+        ],
+        stopwords: {
+            id: 'english-stopwords',
+            words: ['the', 'is', 'at', 'which', 'on']
+        }
+    }
+}, {
+    title: String,
+    category: String,
+    popularity: Number,
+    embedding: [Number]
 }, []);
 ```
 
@@ -449,6 +499,7 @@ BeamJS automatically adds a default primary key to the root schema—id for SQL 
 ```javascript
 var TimestampsPlugin = require('mongoose-timestamp'); // MongoDB
 var TimestampsPlugin = require('beamjs').SQLTimestamps; // SQL
+var TimestampsPlugin = require('beamjs').TypesenseTimestamps; // Typesense
 
 // Automatically adds and manages:
 // - createdAt: Date (set on creation)
@@ -605,6 +656,53 @@ module.exports.user = model({
     email: String,
     password: String
 }, [customSQLPlugin]);
+```
+
+### Typesense Plugins (Search Engine)
+
+```javascript
+// Custom Typesense plugin
+function customSearchPlugin(name, fields, schema, schemaMapping) {
+    
+    // Add custom fields to the Typesense schema
+    fields.push({
+        name: 'search_boost',
+        type: 'float',
+        optional: true
+    });
+    
+    // Add metadata to the schema mapping for internal controller logic
+    schemaMapping['search_boost'] = {
+        type: Number,
+        facet: true
+    };
+    
+    // Modify collection-level constraints
+    schema.default_sorting_field = 'search_boost';
+}
+
+// Usage in model
+module.exports.article = model({
+    name: 'article'
+}, {
+    title: String,
+    content: String
+}, [customSearchPlugin]);
+```
+
+### Custom Datatypes
+
+```javascript
+// Custom functional type
+var SanitizeHTML = function(val) {
+    if (typeof val !== 'string') return val;
+    return val.replace(/<[^>]*>?/gm, ''); // Strip HTML tags
+};
+
+module.exports.comment = model({ name: 'comment' }, {
+    text: SanitizeHTML, // Automatically applied on insert/update
+    author: String
+});
 ```
 
 ### Field Exclusion and Security

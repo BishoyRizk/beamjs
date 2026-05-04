@@ -8,8 +8,8 @@ Private IoB & generative AI IoC enterprise full-stack web development framework 
 
 ## Introduction
 
-- BeamJS is built on top of Backend-JS, offering data controllers for both SQL and NoSQL databases. It also provides file system controllers that work with local or cloud storage.
-- These data controllers act as abstract adapters over ODM/ORM patterns from MongooseJS and SequelizeJS. Their purpose is to define a unified query API that works across different database engines—including both NoSQL and SQL.
+- BeamJS is built on top of Backend-JS, offering data controllers for SQL, NoSQL, and Search databases. It also provides file system controllers that work with local or cloud storage.
+- These data controllers act as abstract adapters over ODM/ORM patterns from MongooseJS, SequelizeJS, and Typesense. Their purpose is to define a unified query API that works across different database engines—including NoSQL, SQL, and Search.
 - **BeamJS** stands for the following technology stack:
   - **Backend-JS** – A Node.js module built on ExpressJS. [Check it out](https://github.com/quaNode/Backend-JS).
   - **ExpressJS** – A minimal and flexible Node.js web application framework. [Visit repo](https://github.com/expressjs/expressjs.com).
@@ -26,7 +26,8 @@ Private IoB & generative AI IoC enterprise full-stack web development framework 
 - It is especially powerful when building or integrating with AI agents, as it provides an IoC to embed intelligent behaviors within structured and secure workflows — making AI less indeterministic and more predictable.
 - Features include:
   - Database encryption for pseudonymization and GDPR compliance.
-  - A built-in data mapping pipeline.
+  - A Built-in semantic search and RAG, enabling behavior-aware indexing and instant querying across causal data flows.  
+  - A built-in data mapping and pipelines.
   - Support for CQRS architecture with mixed model definitions across different databases.
   - Horizontal/database multi-tenancy with automatic multi-DB connection mapping.
   - Deep route-based load balancing using an integrated queuing system.

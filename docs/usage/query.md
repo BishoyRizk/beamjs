@@ -75,6 +75,7 @@ behaviour.entity(new Model({
 ```
 
 ### SQL-Specific Features
+BeamJS translates complex object relationships into optimized SQL joins and subqueries automatically.
 
 ```javascript
 behaviour.entity(new Model({
@@ -105,6 +106,49 @@ behaviour.entity(new Model({
         as: 'averagePrice'
     }]
 }));
+```
+
+### Typesense-Specific Search Features
+BeamJS leverages Typesense for high-performance search, vector retrieval, and generative AI pipelines.
+
+```javascript
+behaviour.entity(new Product()).query(() => [
+    // Full-text search 'q'
+    new QueryExpression({
+        fieldName: 'q',
+        fieldValue: 'wireless headphones'
+    }),
+    
+    // Specify which fields to search in
+    new QueryExpression({
+        fieldName: 'query_by',
+        fieldValue: ['name', 'description', 'category']
+    })
+]).then(function(results) {
+    // Returns typo-tolerant matches
+});
+```
+
+#### AI Pipeline & Semantic Search
+
+```javascript
+behaviour.entity(new Assistant({
+    output: 'conversation' // Vector retrieval + LLM context
+})).query(() => [
+    new QueryExpression({ fieldName: 'q', fieldValue: 'How do I reset my password?' })
+]);
+```
+**Available Output Modes:**
+- `conversation`: Returns context-aware conversational data.
+- `vector`: Returns raw vector embeddings for semantic similarity.
+- `nl`: Natural Language response mode.
+
+#### Faceted Search (Distinct)
+
+```javascript
+behaviour.entity(new Product({
+    distinct: 'category' // Returns counts per category
+}))
 ```
 
 ---

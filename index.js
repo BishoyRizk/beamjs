@@ -38,7 +38,8 @@ var getModelControllerPath = function () {
 
         mongodb: "/MongoController.js",
         mysql: "/SQLController.js",
-        postgres: "/SQLController.js"
+        postgres: "/SQLController.js",
+        typesense: "/TypesenseController"
     };
     var path = [
         ".",
@@ -298,6 +299,10 @@ beam.SQLEncrypt = require(db + "SQLEncrypt.js");
 beam.SQLTimestamps = require(db + "SQLTimestamps.js");
 beam.SQLHashedProperty = require(db + "SQLHashedProperty.js");
 beam.SQLSecret = require(db + "SQLSecret.js");
+beam.TypesenseTimestamps = require(db + "typesense-timestamps.js");
+beam.TypesenseHashedProperty = require(db + "typesense-hashed-property.js");
+beam.TypesenseSecret = require(db + "typesense-secret.js");
+beam.TypesenseAutoIncrement = require(db + "typesense-autoincrement.js");
 beam.Respond = require(api + "Respond.js");
 beam.responder = beam.Respond;
 beam.Redirect = require(api + "Redirect.js");

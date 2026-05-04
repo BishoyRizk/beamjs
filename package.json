@@ -28,7 +28,8 @@
         "sequelize": "latest",
         "sequelize-transparent-cache": "github:quaNode/sequelize-transparent-cache",
         "sequelize-transparent-cache-variable": "github:quaNode/sequelize-transparent-cache-variable",
-        "@fnando/keyring": "latest"
+        "@fnando/keyring": "latest",
+        "typesense": "latest"
     },
     "repository": {
         "type": "git",

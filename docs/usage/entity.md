@@ -232,6 +232,31 @@ BeamJS automatically reconstructs queries in an optimized way, requiring no expl
 }))
 ```
 
+### Search-First (Typesense)
+For applications requiring sub-millisecond search latency.
+
+```javascript
+// High-performance faceted search
+.entity(new Product({ 
+    readonly: true,
+    distinct: 'category'            // Group results by category (faceting)
+})).query(() => [
+    new QueryExpression({ 
+        fieldName: 'q',             // Full-text search
+        fieldValue: 'smart watch' 
+    }),
+    new QueryExpression({ 
+        fieldName: 'price', 
+        comparisonOperator: LT, 
+        fieldValue: 200,
+        logicalOperator: AND,
+        contextualLevel: 0
+    })
+]).then(function (result, e) {
+    // result.facet_counts will contain the counts per category
+});
+```
+
 ---
 
 ### Next Steps
