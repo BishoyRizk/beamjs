@@ -8,8 +8,8 @@ Private IoB & generative AI IoC enterprise full-stack web development framework 
 
 ## Introduction
 
-- BeamJS is built on top of Backend-JS, offering data controllers for SQL, NoSQL, and Search databases. It also provides file system controllers that work with local or cloud storage.
-- These data controllers act as abstract adapters over ODM/ORM patterns from MongooseJS, SequelizeJS, and Typesense. Their purpose is to define a unified query API that works across different database engines—including NoSQL, SQL, and Search.
+- BeamJS is built on top of Backend-JS, offering data controllers for both SQL and NoSQL databases. It also provides file system controllers that work with local or cloud storage.
+- These data controllers act as abstract adapters over ODM/ORM patterns from MongooseJS and SequelizeJS. Their purpose is to define a unified query API that works across different database engines—including both NoSQL and SQL.
 - **BeamJS** stands for the following technology stack:
   - **Backend-JS** – A Node.js module built on ExpressJS. [Check it out](https://github.com/quaNode/Backend-JS).
   - **ExpressJS** – A minimal and flexible Node.js web application framework. [Visit repo](https://github.com/expressjs/expressjs.com).
@@ -26,8 +26,7 @@ Private IoB & generative AI IoC enterprise full-stack web development framework 
 - It is especially powerful when building or integrating with AI agents, as it provides an IoC to embed intelligent behaviors within structured and secure workflows — making AI less indeterministic and more predictable.
 - Features include:
   - Database encryption for pseudonymization and GDPR compliance.
-  - A Built-in semantic search and RAG, enabling behavior-aware indexing and instant querying across causal data flows.  
-  - A built-in data mapping and pipelines.
+  - A built-in data mapping pipeline.
   - Support for CQRS architecture with mixed model definitions across different databases.
   - Horizontal/database multi-tenancy with automatic multi-DB connection mapping.
   - Deep route-based load balancing using an integrated queuing system.
@@ -37,7 +36,7 @@ Private IoB & generative AI IoC enterprise full-stack web development framework 
   - Support for connectionless long-polling HTTP requests.
   - Event-driven architecture over mixed HTTP/WebSocket protocols for pulling and pushing data.
   - Abstract, secure WebSocket handling for scalable real-time events, including features like sub-rooms.
-  - Behavioral network mesh of nodes (application-level) designed for blazing-fast state management and seamless synchronization across distributed system nodes.
+  - A built-in behavioral network mesh of nodes (application-level) designed for blazing-fast state management and synchronization across distributed systems of interconnected nodes.
   - It is ready for event-sourcing applications.
 
 - Backend-JS introduces the concept of **API Behaviors**—organizational and customer behaviors implemented vertically using a customizable enterprise algorithmic mental model. This model follows a *Behavior-First* approach inspired by BDD. [Read more](https://github.com/QuaNode/Backend-JS/wiki/Behavior-first-design).
@@ -52,6 +51,7 @@ Private IoB & generative AI IoC enterprise full-stack web development framework 
   - [droid-behaviours](https://github.com/QuaNode/droid-behaviours) – For Android.
   - [ios-behaviours](https://github.com/QuaNode/ios-behaviours) – For iOS.
   - [php-behaviours](https://github.com/QuaNode/php-behaviours) – For PHP.
+  - **python-behaviours** – For Python.
   - **flutter-behaviours** – For Flutter.
   - **titanium-behaviours** – For Appcelerator Titanium.
   - [More coming soon](https://github.com/QuaNode)
@@ -60,21 +60,21 @@ Private IoB & generative AI IoC enterprise full-stack web development framework 
   - BeamJS and its sub-frameworks are inspired by declarative programming and functional programming.
   - BeamJS SDKs draw on principles from agent-oriented programming and meta-programming.
 - The framework powers the **Behaviors** Engine for software engineering:
-	- Chain-of-Thought (CoT) for planning sequential system operations.
-	- Tree-of-Thoughts (ToT) for structuring hierarchical system behaviors.
-	- Behavior-first programming as an executable translation of behavioral models — a key reducer of essential complexity in modern agile, AI-assisted software development.
-	- A high-level declarative abstraction that remains technology-agnostic, isolating low-level mechanisms to minimize accidental complexity and its resulting LLM hallucinations and security violations, by formalizing anchor tokens as a constrained, grounded Chain of Verification (CoVe) layer rather than conceptual verification alone.
+  - Chain-of-Thought (CoT) for planning sequential system operations.
+  - Tree-of-Thoughts (ToT) for structuring hierarchical system behaviors.
+  - Behavior-first programming as an executable translation of behavioral models — a key reducer of essential complexity in modern agile, AI-assisted software development.
+  - High-level declarative abstraction that remains tech-agnostic to isolate low-level technologies and minimize accidental complexity — the main source of LLM hallucinations and security violations.
 - The results:
-	- Requires far less context as input to SLM — no need for folders of specs, just correct requirements or user stories.
-	- Generates highly deterministic, hallucination-free, durable code — an asset, not a debt.
-	- Minimal or no code review or debugging is required.
-	- Produces very compact output, thanks to declarative programming — consuming far fewer tokens.
-	- Operates as a single-step generation, not a multi-step agent consuming extra compute and time.
-	- Enables a true inversion of control for GenAI, embedding security and compliance deeply for enterprise-grade performance.
-	- A starter can build like an expert without losing deep technical understanding, thanks to transparent declarative abstraction.
-	- Domain context boundaries are fully respected yet open for modifiability — addressing the gap left by traditional DDD in the AI era.
-	- It’s full-stack generation — backend, frontend, mobile, IoT, services, and more — all seamlessly integrated from the start, thanks to declarative agent SDKs.
-	- The generated code supports incremental architecture — switch from request–response to real-time or multi-tenancy with a single line of code. With a truly tech-agnostic approach, you write once and run on any database or service, supporting diverse modern architectures.
+  - Requires far less context as input to SLM — no need for folders of specs, just correct requirements or user stories.
+  - Generates highly deterministic, hallucination-free, durable code — an asset, not a debt.
+  - Minimal or no code review or debugging is required.
+  - Produces very compact output, thanks to declarative programming — consuming far fewer tokens.
+  - Operates as a single-step generation, not a multi-step agent consuming extra compute and time.
+  - Enables a true inversion of control for GenAI, embedding security and compliance deeply for enterprise-grade performance.
+  - A starter can build like an expert without losing deep technical understanding, thanks to transparent declarative abstraction.
+  - Domain context boundaries are fully respected yet open for modifiability — addressing the gap left by traditional DDD in the AI era.
+  - It’s full-stack generation — backend, frontend, mobile, IoT, services, and more — all seamlessly integrated from the start, thanks to declarative agent SDKs.
+  - The generated code supports incremental architecture — switch from request–response to real-time or multi-tenancy with a single line of code. With a truly tech-agnostic approach, you write once and run on any database or service, supporting diverse modern architectures.
 
 It isn’t a replacement for developers — it empowers them to focus on iterative development and validation testing.
 
